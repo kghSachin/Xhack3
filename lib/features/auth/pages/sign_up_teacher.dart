@@ -3,9 +3,9 @@ import 'package:frontend/features/auth/pages/sign_in.dart';
 import 'package:frontend/widgets/custom_textfield.dart';
 import 'package:frontend/widgets/global_variables.dart';
 
-class SignUp extends StatelessWidget {
-  static const String routeName = '/sign-up';
-  const SignUp({super.key});
+class SignUpTeacher extends StatelessWidget {
+  static const String routeName = '/sign-up-teacher';
+  const SignUpTeacher({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class SignUp extends StatelessWidget {
                       'Sign In!',
                       style: TextStyle(color: GlobalVariables.primaryColor),
                     ),
-                    onTap: ()=>Navigator.pushNamed(context, SignIn.routeName),
+                    onTap: () => Navigator.pushNamed(context, SignIn.routeName),
                   ),
                 ],
               ),
@@ -42,12 +42,12 @@ class SignUp extends StatelessWidget {
               CustomTextfield(labelText: 'Password'),
               CustomTextfield(labelText: 'Gender'),
               CustomTextfield(labelText: 'Subject'),
-              CustomTextfield(labelText: 'Location'),
+              CustomTextfield(labelText: 'Address'),
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF245FD7),
+                  backgroundColor: GlobalVariables.primaryColor,
                   foregroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
