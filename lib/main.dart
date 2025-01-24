@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/auth/pages/map_page.dart';
+import 'package:frontend/features/auth/map_page.dart';
 import 'package:frontend/features/auth/pages/sign_in.dart';
 import 'package:frontend/router.dart';
 
@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       onGenerateRoute: (routeSettings)=>generateRoute(routeSettings),
+      debugShowCheckedModeBanner: false,
       home: SignIn()
     );
   }

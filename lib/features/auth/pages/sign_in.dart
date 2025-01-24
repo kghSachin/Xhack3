@@ -59,9 +59,9 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(height: 10),
-              CustomTextfield(labelText: 'Phone Number'),
+              CustomTextfield(labelText: 'Phone Number', textInputType: TextInputType.number,),
               SizedBox(width: 10),
-              CustomTextfield(labelText: 'Password'),
+              CustomTextfield(labelText: 'Password', obscureText: true,),
               SizedBox(width: 10),
               Text(
                 'Forgot your Password?',
