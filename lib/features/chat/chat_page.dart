@@ -16,12 +16,14 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  late TextEditingController texteditingcontroller = TextEditingController();
+  late TextEditingController texteditingcontroller;
+  late FocusNode focusNode;
   bool _isTyping = false;
 
   @override
   void initState() {
     texteditingcontroller = TextEditingController();
+    focusNode = FocusNode();
     super.initState();
   }
 
@@ -56,13 +58,13 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         backgroundColor: scaffoldBackgroundColor,
         elevation: 4,
-        leading: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.blue,
-            )),
+        // leading: const Padding(
+        //     padding: EdgeInsets.all(8.0),
+        //     child: CircleAvatar(
+        //       backgroundColor: Colors.blue,
+        //     )),
         title: const Text(
-          'MY AI Chatbot',
+          'AI COMPANION',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -112,8 +114,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: [
                     Expanded(
                       child: TextField(
+                        focusNode: focusNode,
                         style: const TextStyle(color: Colors.white),
-                        onSubmitted: (value) {},
+                        onSubmitted: (value) {
+                          focusNode.unfocus();
+                        },
                         controller: texteditingcontroller,
                         decoration: const InputDecoration(
                           hintText: "How Can I Help You?",
@@ -141,9 +146,10 @@ class _ChatScreenState extends State<ChatScreen> {
                               "msg": texteditingcontroller.text,
                               "chatIndex": 0
                             });
-                            texteditingcontroller.clear();
+                            focusNode.unfocus();
                             final res = await ApiServices.getModels(
                                 filee, texteditingcontroller.text);
+                            texteditingcontroller.clear();
                             print("response chai aakei ho $res");
                             chatMessages.add({
                               "msg": res ?? "Something went wrong",

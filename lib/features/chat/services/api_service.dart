@@ -19,11 +19,15 @@ class ApiServices {
       //   Part textarea = value!.content!.parts![0];
       //   print("textarea is ${textarea}");
       if (file == null) {
-        final res = await Gemini.instance.chat([
-          Content(parts: [
-            Part.text(command),
-          ])
-        ]);
+        // print("file is null $file");
+        // final res = await Gemini.instance.chat([
+        //   Content(parts: [
+        //     Part.text(command),
+        //   ])
+        // ]);
+        print("command is $command");
+        final res = await Gemini.instance.text(
+            "$command (reply with valid response if the prompt is inappropriate or is not related to study)");
         return res?.output ?? "Something went wrong";
       }
       final res = await Gemini.instance.prompt(parts: [

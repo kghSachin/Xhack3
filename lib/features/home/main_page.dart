@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/features/chat/chat_page.dart';
 import 'package:frontend/features/chat/constants.dart';
 import 'package:frontend/features/home/home_card.dart';
+import 'package:frontend/features/home/home_page.dart';
 import 'package:frontend/features/maps/google_map.dart';
+import 'package:frontend/features/profile/student_profile.dart';
 import 'package:frontend/features/tutor/tutor.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -22,15 +24,13 @@ class MainPage extends ConsumerWidget {
       backgroundColor: scaffoldBackgroundColor,
       context,
       screens: [
-        Container(
-          color: Colors.red,
-        ),
+        HomePage(),
         GoogleMapsView(),
         ChatScreen(),
         TutorPage(),
         Container(
           color: Colors.black,
-          child: HomeCard(),
+          child: ProfilePage(),
         ),
       ],
       items: [
