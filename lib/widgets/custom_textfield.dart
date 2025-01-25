@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/global_variables.dart';
 
 class CustomTextfield extends StatelessWidget {
   final String labelText;
-  const CustomTextfield({super.key, required this.labelText});
+  TextInputType? textInputType;
+  bool? obscureText;
+  CustomTextfield({super.key, required this.labelText, this.textInputType, this.obscureText=false});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TextFormField(
+          keyboardType: textInputType,
+          obscureText: obscureText!,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'This field is required.';
@@ -22,10 +27,9 @@ class CustomTextfield extends StatelessWidget {
                 borderSide: const BorderSide(color: Colors.black)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.blue)),
+                borderSide: BorderSide(color: GlobalVariables.primaryColor)),
           ),
         ),
-        // SizedBox(height: 10),
       ],
     );
   }
