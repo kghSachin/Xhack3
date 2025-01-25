@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/auth/pages/map_page.dart';
-import 'package:frontend/features/auth/pages/sign_in.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/features/home/main_page.dart';
+import 'package:frontend/res/theme.dart';
 import 'package:frontend/router.dart';
 
+const apiKey = "AIzaSyC0zgCFtz4p-6gzDLMg2-Jvp-1IS4Ftchg";
 void main() {
-  runApp(const MyApp());
+  Gemini.init(apiKey: apiKey, enableDebugging: true);
+  runApp(
+    ProviderScope(
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,9 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      onGenerateRoute: (routeSettings)=>generateRoute(routeSettings),
-      home: MapPage()
-    );
+        title: 'Flutter Demo',
+        theme: theme,
+        onGenerateRoute: (routeSettings) => generateRoute(routeSettings),
+        home: MainPage());
   }
 }
