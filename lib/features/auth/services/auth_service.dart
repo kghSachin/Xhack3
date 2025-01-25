@@ -27,15 +27,17 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      print(res.body);
       if (res.statusCode == 200) {
         var token = jsonDecode(res.body)['access_token'];
         prefs.setString('authorization', 'Bearer $token');
-        //TODO: navigate to home
-        // Navigator.push(context, MainPage());
+        Navigator.pushNamed(context, MainPage.routeName);
+      } else {
+        showSnackBar(context, jsonDecode(res.body)['message']);
       }
     } catch (e) {
       if (context.mounted) {
-        showSnackBar(context, 'Some error occured');
+        showSnackBar(context, jsonDecode(e.toString())['message']);
       }
     }
   }
@@ -50,12 +52,11 @@ class AuthService {
     required String role,
   }) async {
     try {
-      //TODO: Test
       http.Response res = await http.post(
         Uri.parse('$uri/api/auth/register'),
         body: jsonEncode({
           'fullName': fullName,
-          'phoneNumber': phoneNumber,
+          'phone': phoneNumber,
           'password': password,
           'gender': gender,
           'address': address,
@@ -65,10 +66,15 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      // print(jsonDecode(res.body)['message']);
+      if (res.statusCode == 201) {
+        Navigator.pushNamed(context, MainPage.routeName);
+      } else {
+        showSnackBar(context, jsonDecode(res.body)['message']);
+      }
     } catch (e) {
       if (context.mounted) {
-        print(e.toString());
-        showSnackBar(context, 'Some error occured');
+        showSnackBar(context, jsonDecode(e.toString()));
       }
     }
   }

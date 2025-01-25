@@ -10,6 +10,7 @@ import 'package:frontend/features/tutor/tutor.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class MainPage extends ConsumerWidget {
+  static const String routeName = '/main-page';
   const MainPage({super.key});
 
   @override

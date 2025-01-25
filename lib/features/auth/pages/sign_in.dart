@@ -82,9 +82,9 @@ class _SignInState extends State<SignIn> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10),
                 CustomTextfield(
                   labelText: 'Phone Number',
+                  maxLength: 10,
                   textInputType: TextInputType.number,
                   controller: phoneNumberController,
                 ),

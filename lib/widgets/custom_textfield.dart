@@ -6,12 +6,15 @@ class CustomTextfield extends StatelessWidget {
   final TextEditingController controller;
   TextInputType? textInputType;
   bool? obscureText;
+  int? maxLength;
+
   CustomTextfield({
     super.key,
     required this.labelText,
     required this.controller,
     this.textInputType,
     this.obscureText = false,
+    this.maxLength,
   });
 
   @override
@@ -19,6 +22,7 @@ class CustomTextfield extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
+          maxLength: maxLength,
           keyboardType: textInputType,
           obscureText: obscureText!,
           controller: controller,

@@ -84,6 +84,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                   ),
                   CustomTextfield(
                     labelText: 'Phone Number',
+                    maxLength: 10,
                     textInputType: TextInputType.number,
                     controller: phoneNumberController,
                   ),
@@ -103,7 +104,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                           borderSide:
                               BorderSide(color: GlobalVariables.primaryColor)),
                     ),
-                    validator: (value) => value == null ? 'Gender' : null,
+                    validator: (value) => value == null ? 'This field is required.' : null,
                     items: genderItems.map((String gender) {
                       return DropdownMenuItem(
                         value: gender,
@@ -123,14 +124,16 @@ class _SignUpStudentState extends State<SignUpStudent> {
                   SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      signUp(
-                        fullName: fullNameController.text,
-                        phoneNumber: phoneNumberController.text,
-                        password: passwordController.text,
-                        gender: selectedGender,
-                        address: addressController.text,
-                        role: 'Student',
-                      );
+                      if (_formKey.currentState!.validate()) {
+                        signUp(
+                          fullName: fullNameController.text,
+                          phoneNumber: phoneNumberController.text,
+                          password: passwordController.text,
+                          gender: selectedGender,
+                          address: addressController.text,
+                          role: 'Student',
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: GlobalVariables.primaryColor,
