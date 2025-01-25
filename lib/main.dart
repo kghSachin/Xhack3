@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/auth/map_page.dart';
 import 'package:frontend/features/auth/pages/sign_in.dart';
+import 'package:frontend/features/profile/teacher_profile.dart';
 import 'package:frontend/router.dart';
 
 void main() {
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      onGenerateRoute: (routeSettings)=>generateRoute(routeSettings),
+      onGenerateRoute: (routeSettings) => generateRoute(routeSettings),
       debugShowCheckedModeBanner: false,
-      home: SignIn()
+      home: TeacherProfile(),
     );
   }
 }
