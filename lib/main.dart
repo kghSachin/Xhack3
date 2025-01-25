@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/features/auth/pages/sign_in.dart';
 import 'package:frontend/features/home/main_page.dart';
 import 'package:frontend/res/theme.dart';
 import 'package:frontend/router.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: theme,
         onGenerateRoute: (routeSettings) => generateRoute(routeSettings),
-        home: MainPage());
+        home: SignIn());
   }
 }
 

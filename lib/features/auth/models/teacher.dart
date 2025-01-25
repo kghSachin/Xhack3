@@ -8,6 +8,7 @@ class Teacher {
   final String gender;
   final String subject;
   final String address;
+  final bool? isVerified;
 
   Teacher({
     required this.id,
@@ -17,6 +18,7 @@ class Teacher {
     required this.gender,
     required this.subject,
     required this.address,
+    this.isVerified = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +30,7 @@ class Teacher {
       'gender': gender,
       'subject': subject,
       'address': address,
+      'isVerified': isVerified,
     };
   }
 
@@ -40,10 +43,12 @@ class Teacher {
       gender: map['gender'] ?? '',
       subject: map['subject'] ?? '',
       address: map['address'] ?? '',
+      isVerified: map['isVerified'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Teacher.fromJson(String source) => Teacher.fromMap(json.decode(source));
+  factory Teacher.fromJson(String source) =>
+      Teacher.fromMap(json.decode(source));
 }

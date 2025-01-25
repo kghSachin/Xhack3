@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/auth/pages/sign_in.dart';
+import 'package:frontend/features/auth/services/auth_service.dart';
 import 'package:frontend/widgets/custom_textfield.dart';
 import 'package:frontend/widgets/global_variables.dart';
 
@@ -13,16 +14,44 @@ class SignUpTeacher extends StatefulWidget {
 }
 
 class _SignUpTeacherState extends State<SignUpTeacher> {
+  final AuthService authService = AuthService();
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController subjectController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   final List<String> genderItems = ["Male", "Female"];
   late String selectedGender;
+
+  void signUp({
+    required String fullName,
+    required String phoneNumber,
+    required String password,
+    required String gender,
+    required String subject,
+    required String address,
+    required String role,
+  }) {
+    authService.signUp(
+      context: context,
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+      password: password,
+      gender: gender,
+      address: address,
+      role: role,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Column(
               spacing: 20,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,25 +60,21 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                   'Sign Up',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                Row(
-                  children: [
-                    Text('Already have an account?'),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      child: Text(
-                        'Sign In!',
-                        style: TextStyle(color: GlobalVariables.primaryColor),
-                      ),
-                      onTap: () => Navigator.pushNamed(context, SignIn.routeName),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 10),
-                CustomTextfield(labelText: 'Full Name'),
-                CustomTextfield(labelText: 'Phone Number', textInputType: TextInputType.number),
-                CustomTextfield(labelText: 'Password', obscureText: true),
+                CustomTextfield(
+                  labelText: 'Full Name',
+                  controller: fullNameController,
+                ),
+                CustomTextfield(
+                  labelText: 'Phone Number',
+                  textInputType: TextInputType.number,
+                  controller: phoneNumberController,
+                ),
+                CustomTextfield(
+                  labelText: 'Password',
+                  obscureText: true,
+                  controller: passwordController,
+                ),
                 DropdownButtonFormField(
                   decoration: InputDecoration(
                     labelText: 'Gender',
@@ -61,8 +86,7 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                         borderSide:
                             BorderSide(color: GlobalVariables.primaryColor)),
                   ),
-                  validator: (value) =>
-                      value == null ? 'Gender' : null,
+                  validator: (value) => value == null ? 'Gender' : null,
                   items: genderItems.map((String gender) {
                     return DropdownMenuItem(
                       value: gender,
@@ -75,11 +99,38 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                     });
                   },
                 ),
-                CustomTextfield(labelText: 'Subject'),
-                CustomTextfield(labelText: 'Address'),
-                SizedBox(height: 10),
+                CustomTextfield(
+                  labelText: 'Subject',
+                  controller: subjectController,
+                ),
+                CustomTextfield(
+                  labelText: 'Address',
+                  controller: addressController,
+                ),
                 ElevatedButton(
                   onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueGrey[100],
+                    foregroundColor: Colors.white,
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text('Upload your CV'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    signUp(
+                      fullName: fullNameController.text,
+                      phoneNumber: phoneNumberController.text,
+                      password: passwordController.text,
+                      gender: selectedGender,
+                      subject: subjectController.text,
+                      address: addressController.text,
+                      role: 'Tutor',
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: GlobalVariables.primaryColor,
                     foregroundColor: Colors.white,
@@ -89,6 +140,22 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                     ),
                   ),
                   child: Text('Sign Up'),
+                ),
+                Row(
+                  children: [
+                    Text('Already have an account?'),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                      child: Text(
+                        'Sign In!',
+                        style: TextStyle(color: GlobalVariables.primaryColor),
+                      ),
+                      onTap: () =>
+                          Navigator.pushNamed(context, SignIn.routeName),
+                    ),
+                  ],
                 ),
               ],
             ),
