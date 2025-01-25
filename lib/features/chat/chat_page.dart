@@ -70,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Flexible(
+            Expanded(
               child: ListView.builder(
                 itemCount: chatMessages.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -96,77 +96,77 @@ class _ChatScreenState extends State<ChatScreen> {
                     : SizedBox()),
             // _isTyping? const Text("Typing..."):const Text("Not Typing"),
 
-            if (!_isTyping) ...[
-              if (filee != null)
-                Image.file(
-                  filee!,
-                  height: 120,
-                  width: double.maxFinite,
-                  fit: BoxFit.fitHeight,
-                ),
-              Material(
-                color: cardColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: const TextStyle(color: Colors.white),
-                          onSubmitted: (value) {},
-                          controller: texteditingcontroller,
-                          decoration: const InputDecoration(
-                            hintText: "How Can I Help You?",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: InputBorder.none,
-                          ),
+            // if (!_isTyping) ...[
+            if (filee != null)
+              Image.file(
+                filee!,
+                height: 120,
+                width: double.maxFinite,
+                fit: BoxFit.fitHeight,
+              ),
+            Material(
+              color: cardColor,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        onSubmitted: (value) {},
+                        controller: texteditingcontroller,
+                        decoration: const InputDecoration(
+                          hintText: "How Can I Help You?",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
                         ),
                       ),
-                      IconButton(
-                          splashColor: Colors.blue,
-                          onPressed: () {
-                            _pickFile();
-                          },
-                          icon: Icon(
-                            Icons.file_copy,
-                            color: Colors.grey,
-                          )),
-                      IconButton(
-                          onPressed: () async {
-                            try {
-                              setState(() {
-                                _isTyping = true;
-                              });
-                              chatMessages.add({
-                                "msg": texteditingcontroller.text,
-                                "chatIndex": 0
-                              });
-                              texteditingcontroller.clear();
-                              final res = await ApiServices.getModels(
-                                  filee, texteditingcontroller.text);
-                              print("response chai aakei ho $res");
-                              chatMessages.add({
-                                "msg": res ?? "Something went wrong",
-                                "chatIndex": 1,
-                                // "image": filee?.readAsBytesSync(),
-                              });
-                              filee = null;
-                              setState(() {
-                                _isTyping = false;
-                              });
-                            } catch (error) {
-                              print(error);
-                            }
-                          },
-                          icon: const Icon(
-                            Icons.send_rounded,
-                            color: Colors.grey,
-                          ))
-                    ],
-                  ),
+                    ),
+                    IconButton(
+                        splashColor: Colors.blue,
+                        onPressed: () {
+                          _pickFile();
+                        },
+                        icon: Icon(
+                          Icons.file_copy,
+                          color: Colors.grey,
+                        )),
+                    IconButton(
+                        onPressed: () async {
+                          try {
+                            setState(() {
+                              _isTyping = true;
+                            });
+                            chatMessages.add({
+                              "msg": texteditingcontroller.text,
+                              "chatIndex": 0
+                            });
+                            texteditingcontroller.clear();
+                            final res = await ApiServices.getModels(
+                                filee, texteditingcontroller.text);
+                            print("response chai aakei ho $res");
+                            chatMessages.add({
+                              "msg": res ?? "Something went wrong",
+                              "chatIndex": 1,
+                              // "image": filee?.readAsBytesSync(),
+                            });
+                            filee = null;
+                            setState(() {
+                              _isTyping = false;
+                            });
+                          } catch (error) {
+                            print(error);
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.send_rounded,
+                          color: Colors.grey,
+                        ))
+                  ],
                 ),
-              )
-            ]
+              ),
+            )
+            // ]
           ],
         ),
       ),

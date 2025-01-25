@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/features/chat/chat_page.dart';
 import 'package:frontend/features/chat/constants.dart';
+import 'package:frontend/features/home/home_card.dart';
 import 'package:frontend/features/maps/google_map.dart';
 import 'package:frontend/features/tutor/tutor.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -28,7 +29,8 @@ class MainPage extends ConsumerWidget {
         ChatScreen(),
         TutorPage(),
         Container(
-          color: Colors.purple,
+          color: Colors.black,
+          child: HomeCard(),
         ),
       ],
       items: [
