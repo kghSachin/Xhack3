@@ -1,14 +1,37 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:frontend/api/api_constants.dart';
 import 'package:frontend/features/chat/model/model.dart';
+import 'package:frontend/features/home/models/mentor_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
-  static get baseUrl => null;
+  static get baseUrl => "http://192.168.137.1:3000";
 
   static get apiKey => null;
+
+  static Future<Either<List<ModelsModel>, bool>> getMentorList() async {
+    try {
+      final url = Uri.parse("$baseUrl${Endpoints.getTutorArticles}");
+      print(url);
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        final decodedValue = User.fromJson(jsonResponse);
+        print("Decoded value is ");
+        print(decodedValue);
+        return left(jsonResponse);
+      }
+      return right(false);
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
+  }
 
   static Future<String> getModels(File? file, String command) async {
     try {

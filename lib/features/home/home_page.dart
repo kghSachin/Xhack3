@@ -4,6 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:frontend/features/chat/constants.dart';
+import 'package:frontend/features/chat/services/api_service.dart';
+import 'package:frontend/features/home/constants.dart';
+import 'package:frontend/features/home/mentor_card.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,10 +54,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                       fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 SizedBox(
-                  height: 4,
+                  height: 12,
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 240,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
@@ -64,28 +67,52 @@ class _HomePageState extends ConsumerState<HomePage> {
                       );
                     },
                     itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(4),
-                        color: Theme.of(context).cardColor,
+                      return MentorCard();
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  "Course Category",
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).dividerColor,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      16,
+                    ),
+                  ),
+                  height: 410,
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemCount: 8,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () async {
+                          await ApiServices.getMentorList();
+                        },
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const CachedNetworkImageWrapper(
-                              imageUrl:
-                                  "https://thypix.com/wp-content/uploads/2018/05/Sommerlandschaft-Bilder-30.jpg",
-                              height: 150,
-                              width: 200,
-                            ),
-                            Text(
-                              "Sudip Adhikari",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                            )
+                            Image.asset(imagePath[index],
+                                height: 70, width: 70),
+                            SizedBox(height: 8),
+                            Text(imageNames[index]),
                           ],
                         ),
                       );

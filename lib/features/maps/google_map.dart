@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:frontend/features/chat/services/api_service.dart';
+import 'package:frontend/key.dart';
+import 'package:frontend/main.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GoogleMapsView extends ConsumerStatefulWidget {
@@ -70,13 +74,16 @@ class _GoogleMapsViewState extends ConsumerState<GoogleMapsView> {
               left: 10,
               right: 0,
               child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 100),
+                padding: const EdgeInsets.only(left: 24, right: 110),
                 child: TypeAheadField(
                   debounceDuration: Duration(seconds: 1),
                   builder: (context, controller, focusNode) {
                     return TextField(
                       controller: controller,
                       focusNode: focusNode,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -86,6 +93,9 @@ class _GoogleMapsViewState extends ConsumerState<GoogleMapsView> {
                         fillColor: Colors.white,
                         filled: true,
                         hintText: 'Search',
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                        ),
                         prefixIcon: Icon(Icons.search),
                       ),
                     );
@@ -113,14 +123,21 @@ class _GoogleMapsViewState extends ConsumerState<GoogleMapsView> {
               top: 50,
               child: MaterialButton(
                 height: 54,
-                minWidth: 48,
+                minWidth: 40,
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 color: Colors.white,
                 onPressed: () {},
                 child: Icon(Icons.search),
-              ))
+              )),
+          // Positioned(
+          //     top: 80,
+          //     left: 20,
+          //     child: GooglePlaceAutoCompleteTextField(
+          //         textEditingController: autoCompleteController,
+          //         googleAPIKey: ApiKey.apiKey))
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/features/chat/constants.dart';
+import 'package:frontend/features/profile/teacher_profile.dart';
 
 class TutorPage extends ConsumerWidget {
   const TutorPage({super.key});
@@ -180,7 +181,10 @@ class TeacherCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 color: Colors.blueGrey,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TeacherProfile()));
+                },
                 child: Text("Profile",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white,
