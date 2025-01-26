@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../api/data/source/suggestion.dart';
 import '../maps/google_map.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -105,7 +106,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () async {
-                          await ApiServices.getMentorList();
+                          // await ApiServices.getMentorList();
                         },
                         child: Column(
                           children: [

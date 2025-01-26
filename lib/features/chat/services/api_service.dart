@@ -18,7 +18,10 @@ class ApiServices {
     try {
       final url = Uri.parse("$baseUrl${Endpoints.getTutorArticles}");
       print(url);
-      final response = await http.get(url);
+      final response = await http.get(url, headers:{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $apiKey'
+      } );
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
         final decodedValue = User.fromJson(jsonResponse);

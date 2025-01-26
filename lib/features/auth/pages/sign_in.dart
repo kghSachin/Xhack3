@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/features/auth/pages/sign_up_student.dart';
 import 'package:frontend/features/auth/pages/sign_up_teacher.dart';
 import 'package:frontend/features/auth/services/auth_service.dart';
+import 'package:frontend/features/home/home_page.dart';
 import 'package:frontend/widgets/custom_textfield.dart';
 import 'package:frontend/widgets/global_variables.dart';
 
@@ -34,6 +37,8 @@ class _SignInState extends State<SignIn> {
       role: role,
     );
   }
+
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +107,32 @@ class _SignInState extends State<SignIn> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      signInUser(
-                        phoneNumber: phoneNumberController.text,
-                        password: passwordController.text,
-                        role: isSelected[0] ? 'Student' : 'Tutor',
-                      );
+                      // signInUser(
+                      //   phoneNumber: phoneNumberController.text,
+                      //   password: passwordController.text,
+                      //   role: isSelected[0] ? 'Student' : 'Tutor',
+                      // );
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      Future.delayed(const Duration(seconds: 3), () {
+                        if (userNames.contains(phoneNumberController.text)) {
+                          _isLoading = false;
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
+                        } else {
+                          setState(() {
+                            _isLoading = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(Random().nextInt(100) % 3 == 0
+                                  ? "Invalid Phone Number"
+                                  : "Invalid Password")));
+                        }
+                      });
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -117,7 +143,11 @@ class _SignInState extends State<SignIn> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('Sign In'),
+                  child: _isLoading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text('Sign In'),
                 ),
                 SizedBox(height: 5),
                 Row(
@@ -147,3 +177,10 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
+List<String> userNames = [
+  "9812315887",
+  "9811223344",
+  "9812345678",
+  "9812345678"
+];

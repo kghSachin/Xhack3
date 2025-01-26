@@ -25,6 +25,6 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: myDarkTheme,
         onGenerateRoute: (routeSettings) => generateRoute(routeSettings),
-        home: MainPage());
+        home: SignIn());
   }
 }
