@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../api/data/source/list_teachers.dart';
 import '../../api/data/source/suggestion.dart';
 
 class GoogleMapsView extends ConsumerStatefulWidget {
@@ -33,7 +34,20 @@ class _GoogleMapsViewState extends ConsumerState<GoogleMapsView> {
       body: Stack(
         children: [
           GoogleMap(
-            markers: {},
+            markers: {
+              ...teacherList.map((e) => Marker(
+                    markerId: MarkerId(e.teacherName!),
+                    position:
+                        LatLng(e.location!.latitude, e.location!.longitude),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueGreen,
+                    ),
+                    infoWindow: InfoWindow(
+                      title: e.teacherName!,
+                      snippet: e.teacherBio!,
+                    ),
+                  ))
+            },
             onTap: (latLng) {
               ref.read(circleProvider.notifier).update(
                     (state) => {

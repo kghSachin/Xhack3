@@ -7,6 +7,7 @@ import 'package:frontend/features/chat/constants.dart';
 import 'package:frontend/features/chat/services/api_service.dart';
 import 'package:frontend/features/home/constants.dart';
 import 'package:frontend/features/home/mentor_card.dart';
+import 'package:frontend/features/profile/teacher_profile.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,7 +69,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                       );
                     },
                     itemBuilder: (context, index) {
-                      return MentorCard();
+                      return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TeacherProfile()));
+                          },
+                          child: MentorCard());
                     },
                   ),
                 ),

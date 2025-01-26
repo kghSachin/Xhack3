@@ -5,6 +5,7 @@ import 'package:frontend/features/auth/pages/sign_up_student.dart';
 import 'package:frontend/features/auth/pages/sign_up_teacher.dart';
 import 'package:frontend/features/auth/services/auth_service.dart';
 import 'package:frontend/features/home/home_page.dart';
+import 'package:frontend/features/home/main_page.dart';
 import 'package:frontend/widgets/custom_textfield.dart';
 import 'package:frontend/widgets/global_variables.dart';
 
@@ -121,7 +122,7 @@ class _SignInState extends State<SignIn> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => MainPage()),
                               (route) => false);
                         } else {
                           setState(() {
