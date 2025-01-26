@@ -8,6 +8,7 @@ import 'package:frontend/features/chat/constants.dart';
 import 'package:frontend/features/chat/services/api_service.dart';
 import 'package:frontend/features/home/constants.dart';
 import 'package:frontend/features/home/mentor_card.dart';
+import 'package:frontend/features/home/subject/subject_home.dart';
 import 'package:frontend/features/profile/teacher_profile.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +128,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SubjectContent(
+                                        imageUrl: imagePath[index],
+                                        name: imageNames[index],
+                                        subtitle: imageNames[index],
+                                      )));
                           // await ApiServices.getMentorList();
                         },
                         child: Column(
@@ -187,11 +196,10 @@ class _CarouselWidgetState extends State<CarouselWidget> {
             controller: _pageController,
             children: [
               ...List.generate(5, (index) {
-                return const FractionallySizedBox(
+                return FractionallySizedBox(
                   widthFactor: 0.95,
                   child: CachedNetworkImageWrapper(
-                    imageUrl:
-                        "https://thypix.com/wp-content/uploads/2018/05/Sommerlandschaft-Bilder-30.jpg",
+                    imageUrl: imageLinks[index],
                   ),
                 );
               }),
@@ -282,11 +290,11 @@ class UserInfoContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hi, Sachin",
+              "Hi, Sumit",
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const Text(
-              "What would you like to learn today?\n Search below",
+              "Good Morning!",
               style: TextStyle(color: Colors.grey, fontSize: 14),
             )
           ],

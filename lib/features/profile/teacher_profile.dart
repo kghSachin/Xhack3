@@ -34,10 +34,28 @@ class TeacherProfile extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 60),
-                    Text(
-                      'Nischal Kafle',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    Row(
+                      children: [
+                        Text(
+                          'Nischal Kafle',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
+                        ),
+                        Spacer(),
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          color: Colors.blueGrey,
+                          padding: EdgeInsets.all(8),
+                          onPressed: () {},
+                          child: Text(
+                            "Hire Me",
+                          ),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        )
+                      ],
                     ),
                     Text(
                       'Teacher · Maths',
