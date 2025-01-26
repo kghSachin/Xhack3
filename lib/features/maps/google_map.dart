@@ -49,14 +49,14 @@ class _GoogleMapsViewState extends ConsumerState<GoogleMapsView> {
                   ))
             },
             onTap: (latLng) {
-              ref.read(circleProvider.notifier).update(
-                    (state) => {
-                      Circle(
-                          circleId: CircleId("1"),
-                          radius: 20000,
-                          center: latLng)
-                    },
-                  );
+              // ref.read(circleProvider.notifier).update(
+              //       (state) => {
+              //         Circle(
+              //             circleId: CircleId("1"),
+              //             radius: 20000,
+              //             center: latLng)
+              //       },
+              //     );
             },
             circles: circle,
             initialCameraPosition:

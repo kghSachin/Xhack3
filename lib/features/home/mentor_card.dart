@@ -1,18 +1,24 @@
-
 import 'package:flutter/material.dart';
 import 'package:frontend/features/home/home_page.dart';
 
 import '../chat/constants.dart';
+import '../profile/teacher_profile.dart';
 
 class MentorCard extends StatelessWidget {
+  final String imageUrl;
+  final String name;
+  final String location;
   const MentorCard({
     super.key,
+    required this.imageUrl,
+    required this.name,
+    required this.location,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(6),
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
           color: cardColor,
@@ -32,9 +38,8 @@ class MentorCard extends StatelessWidget {
                       16,
                     )),
                 padding: EdgeInsets.all(4),
-                child: const CachedNetworkImageWrapper(
-                  imageUrl:
-                      "https://thypix.com/wp-content/uploads/2018/05/Sommerlandschaft-Bilder-30.jpg",
+                child: CachedNetworkImageWrapper(
+                  imageUrl: imageUrl,
                   height: 80,
                   width: 80,
                 ),
@@ -49,15 +54,11 @@ class MentorCard extends StatelessWidget {
                       16,
                     )),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Sudip Adhikari",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
+                      name,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -66,11 +67,8 @@ class MentorCard extends StatelessWidget {
                       height: 2,
                     ),
                     Text(
-                      "Computer Teacher",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(
+                      "Computer Science\n $location",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.w400,
                             letterSpacing: 0.4,
                             height: 1.45,
@@ -90,9 +88,7 @@ class MentorCard extends StatelessWidget {
                           return Icon(
                             Icons.star,
                             size: 20,
-                            color: index < 4
-                                ? Colors.amber
-                                : Colors.grey,
+                            color: index < 4 ? Colors.amber : Colors.grey,
                           );
                         })
                       ],
@@ -113,10 +109,7 @@ class MentorCard extends StatelessWidget {
               "I am Sudip adhikari, a computer teacher, I have been teaching for more than 10 years. I have taught in many schools and colleges in India and abroad. I am a certified teacher and have been teaching for over 10 years. I have taught in many schools and colleges in India and abroad. I am a certified teacher and have been teaching for over 10 years.",
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.grey,
                   ),
@@ -124,15 +117,18 @@ class MentorCard extends StatelessWidget {
           ),
           MaterialButton(
             minWidth: 200,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             color: Theme.of(context).cardColor,
             padding: EdgeInsets.all(8),
             child: const Text(
               "View Profile",
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => TeacherProfile()));
+            },
           ),
         ],
       ),

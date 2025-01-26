@@ -15,7 +15,7 @@ class HomeCard extends ConsumerWidget {
       child: Column(
         children: [
           Text(
-            "Nurturing Health and Innovation: The Inspiring Journey of Ekaa Kombucha",
+            "Explaining Pythagoras theorem in simple words",
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.4,
@@ -78,7 +78,7 @@ class HomeCard extends ConsumerWidget {
             height: 12,
           ),
           Text(
-            """In a candid interview, Divya Maharjan, one of the founder of Ekaa Kombucha, shares the unique story behind the inception of the startup, highlighting the challenges faced and the triumphs achieved in Nepal's growing health and beverage industry.""",
+            """Pythagoras theorem is a mathematical theorem in Euclidean geometry. It states that in a right triangle, the square of the length of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the lengths of the other two sides. It is named after the ancient Greek mathematician Pythagoras, who discovered and proved the theorem.""",
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.4,
@@ -109,7 +109,7 @@ class HomeCard extends ConsumerWidget {
               child: CachedNetworkImage(
                 height: 280,
                 imageUrl:
-                    "https://chiyarastartup.com/media/img/Nurturing_Health_and_Innovation.jpg",
+                    "https://th.bing.com/th/id/R.ba01d095b9f9a650e61d8f49d2b28519?rik=rVVFOj18ozgpZw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fMath-Mathematics-Formula-Wallpaper-for-PC.jpg&ehk=%2bfTho6j8Ym8wGaYhOjf%2bGXs56O7AyL38fNlEbHjIzqQ%3d&risl=&pid=ImgRaw&r=0",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(

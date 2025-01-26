@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:frontend/api/data/source/list_teachers.dart';
 import 'package:frontend/features/chat/constants.dart';
 import 'package:frontend/features/chat/services/api_service.dart';
 import 'package:frontend/features/home/constants.dart';
@@ -15,6 +16,14 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../api/data/source/suggestion.dart';
 import '../maps/google_map.dart';
+
+List<String> imageLinks = [
+  "https://www.strategy-business.com/media/image/38302633_thumb5_690x400.jpg",
+  "https://thewarriormessenger.com/wp-content/uploads/2016/11/Liu_1-900x826.jpg",
+  "https://thewarriormessenger.com/wp-content/uploads/2016/11/Liu_1-900x826.jpg",
+  "https://www.strategy-business.com/media/image/38302633_thumb5_690x400.jpg",
+  "https://th.bing.com/th/id/R.ba01d095b9f9a650e61d8f49d2b28519?rik=rVVFOj18ozgpZw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fMath-Mathematics-Formula-Wallpaper-for-PC.jpg&ehk=%2bfTho6j8Ym8wGaYhOjf%2bGXs56O7AyL38fNlEbHjIzqQ%3d&risl=&pid=ImgRaw&r=0",
+];
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -76,7 +85,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 MaterialPageRoute(
                                     builder: (context) => TeacherProfile()));
                           },
-                          child: MentorCard());
+                          child: MentorCard(
+                            name: teacherList[index].teacherName!,
+                            location: teacherList[index].teacherAddress!,
+                            imageUrl: imageLinks[index],
+                          ));
                     },
                   ),
                 ),

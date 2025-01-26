@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/features/chat/chat_page.dart';
 import 'package:frontend/features/chat/constants.dart';
-import 'package:frontend/features/home/home_card.dart';
 import 'package:frontend/features/home/home_page.dart';
 import 'package:frontend/features/maps/google_map.dart';
 import 'package:frontend/features/profile/student_profile.dart';
@@ -53,7 +52,7 @@ class MainPage extends ConsumerWidget {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: Icon(Icons.assist_walker),
+          icon: Icon(Icons.people),
           title: ("tutor"),
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
